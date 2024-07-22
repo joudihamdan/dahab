@@ -43,6 +43,8 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   delayed_display: ^2.0.0
   font_awesome_flutter: ^10.7.0
+  device_preview: ^1.2.0
+  animations: ^2.0.0
   #delayed_display:
   #font_awesome_flutter:
   #shared_preferences:

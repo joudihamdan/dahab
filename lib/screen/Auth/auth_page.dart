@@ -1,5 +1,5 @@
 
-import 'package:dahab_clinic_management/screen/home_page.dart';
+import 'package:dahab_clinic_management/screen/Home%20page/home_page.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +10,7 @@ import '../../controllers/validation_controller.dart';
 import '../../widgets/signup&homepge/app_icon.dart';
 import '../../widgets/signup&homepge/container_button.dart';
 import '../../widgets/signup&homepge/text_field_container.dart';
-import '../nav_bar.dart';
+import '../Home page/nav_bar.dart';
 import 'forget_password_page.dart';
 
 class AuthPage extends StatelessWidget {

@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 import '../../const/constant.dart';
-import '../../screen/home_page.dart';
+import '../../screen/Home page/home_page.dart';
 
 Row generate_category_dots(double height, int num) {
   return Row(

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'color_manager.dart';
 
 class StyleManager {
+
   static const TextStyle kAppBar = TextStyle(
       color: kCreamColor,
       fontSize: 24,
@@ -23,36 +24,46 @@ class StyleManager {
     );
   }
 
-  static TextStyle normalText({
-    Color color = ColorManager.blackColor,
-    double size = 18,
-  }) {
-    return TextStyle(color: color, fontSize: size, fontFamily: "Poppins");
-  }
+  static TextStyle normalText = const TextStyle(
+    color: Colors.black,
+    fontFamily: 'Montserrat',
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
   
-static TextStyle kCardTextStyle = TextStyle(
+static TextStyle kCardTextStyle = const TextStyle(
     color: Colors.white,
     fontFamily: 'Montserrat',
     fontSize: 40,
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle buttunTextStyle = TextStyle(
+  static TextStyle buttunTextStyle = const TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 18.0,
     color: ColorManager.kWhiteColor,
     fontWeight: FontWeight.w700,
   );
 
-  static TextStyle headerTextStyle = TextStyle(
+  static TextStyle headerTextStyle = const TextStyle(
     fontFamily: 'Montserrat',
       fontSize: 20,
       color: ColorManager.kBrown2Color,fontWeight: FontWeight.w800
   );
 
+
+  static TextStyle profileName = const TextStyle(
+    fontSize: 25,
+      fontWeight: FontWeight.bold,
+      color: ColorManager.jBrownColor,
+    //fontFamily: 'Montserrat',
+
+  );
+
   static ButtonStyle ElevatedButtonStyle= ElevatedButton.styleFrom(
     backgroundColor:
-    Color(0xff643624)
+    const Color(0xff643624)
         .withOpacity(0.8),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(25),

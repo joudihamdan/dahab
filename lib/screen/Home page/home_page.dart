@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../const/constant.dart';
-import '../widgets/signup&homepge/genetate_dots.dart';
-import '../widgets/signup&homepge/home_card.dart';
-import '../widgets/signup&homepge/home_text.dart';
+import '../../const/constant.dart';
+import '../../widgets/signup&homepge/genetate_dots.dart';
+import '../../widgets/signup&homepge/home_card.dart';
+import '../../widgets/signup&homepge/home_text.dart';
 
 int pageNo1 = 0;
 int pageNo2 = 0;
@@ -67,95 +67,97 @@ class _HomePageState extends State<HomePage> {
           SizedBox(width: width * 0.04)
         ],
       ),
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-        home_text(height, width, 'Discover Our Categories'),
-        SizedBox(
-          height: height * 0.24,
-          child: PageView.builder(
-            padEnds: false,
-            controller: categoryController,
-            onPageChanged: (index) {
-              pageNo1 = index;
-              setState(() {});
-            },
-            itemBuilder: (_, index) {
-              return AnimatedBuilder(
-                animation: categoryController,
-                builder: (ctx, child) {
-                  return child!;
-                },
-                child:GestureDetector(
-                  onTap: (){
-                    CategoryModel category=CategoryModel(
-                    id: 1,
-                    name: "Skin care",
-                    image: "",
-                    description:
-                    "Voor de huid, die wat meer aandacht nodig heeft, bieden wij speciale huidbehandelingen aan. Deze pakken wij effectief en grondig aan, zoals veelvoorkomende huidproblemen zoals acne, huidveroudering, couperose, ");
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Spacer(),
 
-                    Get.to(CategoryScreen(categoryModel:category ,));
+              home_text(height, width, 'Discover Our Categories'),
+          SizedBox(
+            height: height * 0.24,
+            child: PageView.builder(
+              padEnds: false,
+              controller: categoryController,
+              onPageChanged: (index) {
+                pageNo1 = index;
+                setState(() {});
+              },
+              itemBuilder: (_, index) {
+                return AnimatedBuilder(
+                  animation: categoryController,
+                  builder: (ctx, child) {
+                    return child!;
                   },
-                  child: categories_card(
-                      350, 550, AssetsManager.testImg, 'Skin Care'),
-                ),
-              );
-            },
-            itemCount: 5,
-          ),
-        ),
-        generate_category_dots(height, 5),
-        home_text(height, width, 'Top Services'),
-        SizedBox(
-          height: height * 0.15,
-          child: PageView.builder(
-            padEnds: false,
-            controller: serviceController,
-            onPageChanged: (index) {
-              pageNo2 = index;
-              setState(() {});
-            },
-            itemBuilder: (_, index) {
-              return AnimatedBuilder(
-                animation: serviceController,
-                builder: (ctx, child) {
-                  return child!;
-                },
-                child: GestureDetector(
-                  onTap: () {
-                    ServiceModel service=  ServiceModel(
-                        name: "Lasre",
-                        image: AssetsManager.testImg,
-                        description:
-                        "too long description andd isvb isc kihv ksvb iskv sv shkls isv uikfg ig iusgc u sfj usfw uif gadls ufdwdifkwf wfwvebbbeebeb dbeb ebebev ",
-                        price: 40);
-                    Get.to(ServiceScreen(serviceModel: service,));
-                  }
-                ,    child: service_card(width, height, 'assets/images/im.png', 'Derma')),
-              );
-            },
-            itemCount: 5,
-          ),
-        ),
-        SizedBox(height: width * 0.04),
-        generate_service_dots(height, 5),
-        home_text(height, width, 'Catch Up with Our Offers!'),
-        Center(
-          child: Container(
-            height: 130,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: kCoffeeColor.withOpacity(0.5),
-                  spreadRadius: 3.0,
-                  blurRadius: 5.0,
-                )
-              ],
-              borderRadius: BorderRadius.circular(20),
-              color: kBeigeColor,
+                  child:GestureDetector(
+                    onTap: (){
+                      Get.to(()=>  CategoryScreen(categoryId: index,));
+                    },
+                    child: categories_card(
+                        350, 550, AssetsManager.testImg, 'Skin Care'),
+                  ),
+                );
+              },
+              itemCount: 5,
             ),
-            child: Expanded(
+          ),
+
+              generate_category_dots(height, 5),
+          Spacer(),
+          home_text(height, width, 'Top Services'),
+          SizedBox(
+            height: height * 0.15,
+            child: PageView.builder(
+              padEnds: false,
+              controller: serviceController,
+              onPageChanged: (index) {
+                pageNo2 = index;
+                setState(() {});
+              },
+              itemBuilder: (_, index) {
+                return AnimatedBuilder(
+                  animation: serviceController,
+                  builder: (ctx, child) {
+                    return child!;
+                  },
+                  child: GestureDetector(
+                    onTap: () {
+                      // ServiceModel service=  ServiceModel(
+                      //     name: "Lasre",
+                      //     image: AssetsManager.testImg,
+                      //     description:
+                      //     "too long description andd isvb isc kihv ksvb iskv sv shkls isv uikfg ig iusgc u sfj usfw uif gadls ufdwdifkwf wfwvebbbeebeb dbeb ebebev ",
+                      //     price: 40);
+                      Get.to(ServiceScreen(id: index,));
+                    }
+                  ,    child: service_card(width, height, 'assets/images/im.png', 'Derma')),
+                );
+              },
+              itemCount: 5,
+            ),
+          ),
+              Spacer(),
+
+//              SizedBox(height: width * 0.04),
+          generate_service_dots(height, 5),
+              Spacer(),
+
+              home_text(height, width, 'Catch Up with Our Offers!'),
+          Center(
+            child: Container(
+              height: height*0.15,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: kCoffeeColor.withOpacity(0.5),
+                    spreadRadius: 3.0,
+                    blurRadius: 5.0,
+                  )
+                ],
+                borderRadius: BorderRadius.circular(20),
+                color: kBeigeColor,
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -170,12 +172,14 @@ class _HomePageState extends State<HomePage> {
                               fontSize: width * 0.06,
                               color: kCreamColor,
                             )),
-                        SizedBox(height: height * 0.009),
+                      //  SizedBox(height: height * 0.009),
+                        Spacer(),
                         Text("Discount 10% on your session",
                             style: kText.copyWith(
                               fontSize: width * 0.04,
-                            )),
-                        SizedBox(height: height * 0.02),
+                            ),),
+                        Spacer(),
+                       // SizedBox(height: height * 0.02),
                         Text("Offer ends at 2/2/2222",
                             style: kText.copyWith(
                               fontSize: width * 0.035,
@@ -185,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Align(
-                    alignment: Alignment.bottomRight,
+                    alignment: Alignment.bottomCenter,
                     child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
@@ -193,22 +197,23 @@ class _HomePageState extends State<HomePage> {
                         ),
                         margin: EdgeInsets.all(height * 0.01),
                         height: height * 0.05,
-                        width: width * 0.25,
+                      //  width: width * 0.25,
                         child: TextButton(
                             onPressed: () {},
                             child: Text('Book!',
                                 style: kText.copyWith(
                                     fontSize: width * 0.05,
                                     color: kCoffeeColor,
-                                    fontWeight: FontWeight.w900)))),
+                                    fontWeight: FontWeight.w900),),),),
                   ),
                 ],
               ),
             ),
           ),
-        ),
+              Spacer(),
 
-      ]),
+        ]),
+      ),
     );
   }
 }
