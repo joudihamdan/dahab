@@ -6,7 +6,7 @@ class AssetsManager {
   /// Images
   static const testImg = '$imagesPath/im.png';
   static const skinCare = '$imagesPath/skin care.png';
-  static const wallPaper = '$imagesPath/wallpaper1.jpg';
+  static const wallPaper = '$imagesPath/wallpaper2.jpg';
   static const appIcon = '$imagesPath/appicon.png';
 
 

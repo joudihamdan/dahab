@@ -1,5 +1,6 @@
 import 'package:dahab_clinic_management/utils/assets_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class NoInternetScreen extends StatelessWidget {
   const NoInternetScreen({super.key});
@@ -14,12 +15,8 @@ class NoInternetScreen extends StatelessWidget {
           image: DecorationImage(
               fit: BoxFit.fill, image: AssetImage(AssetsManager.wallPaper)),
         ),
-        child: const Center(
-          child: Text(
-            "Oops!!\n There is no Internet",
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
-          ),
+        child:  Center(
+          child: Lottie.asset('assets/lottie/noInternet.json')
         ),
       ),
     );

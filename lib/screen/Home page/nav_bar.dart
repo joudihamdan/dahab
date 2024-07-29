@@ -1,6 +1,4 @@
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:dahab_clinic_management/screen/book_screen.dart';
 import 'package:dahab_clinic_management/screen/Home%20page/profile.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
 import 'package:flutter/material.dart';
@@ -26,23 +24,27 @@ class NavigationsBar extends StatelessWidget {
             children: [
               const HomePage(),
               const Gallery(),
-               SessionsScreen(),
-               ProfileScreen(),
+              SessionsScreen(),
+              ProfileScreen(),
             ],
           ),
           bottomNavigationBar: CurvedNavigationBar(
             height: 55,
-            color:kCoffeeColor,
-            backgroundColor: ColorManager.kWhiteColor,
+            color: kCoffeeColor,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark
+                ? ColorManager.jBrownColor
+                : Color(0xffFEF3EC),  
             buttonBackgroundColor: ColorManager.kWhiteColor,
             onTap: controller.changeTabIndex,
             animationCurve: Curves.linear,
             index: controller.tabIndex,
             items: [
-              barIcon(context, FontAwesomeIcons.house,(controller.tabIndex == 0)),
-              barIcon(context, FontAwesomeIcons.artstation,(controller.tabIndex == 1)),
-              barIcon(context, Icons.layers_sharp,(controller.tabIndex == 2)),
-              barIcon(context, Icons.person,(controller.tabIndex == 3)),
+              barIcon(
+                  context, FontAwesomeIcons.house, (controller.tabIndex == 0)),
+              barIcon(context, FontAwesomeIcons.artstation,
+                  (controller.tabIndex == 1)),
+              barIcon(context, Icons.layers_sharp, (controller.tabIndex == 2)),
+              barIcon(context, Icons.person, (controller.tabIndex == 3)),
             ],
           ),
         );

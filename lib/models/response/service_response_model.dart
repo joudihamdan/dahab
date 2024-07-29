@@ -6,6 +6,7 @@ import 'package:dahab_clinic_management/models/result_model.dart';
 class ServiceResponseModel extends ResultModel {
   final String name;
   final String image;
+  
   ServiceResponseModel({
     required this.name,
     required this.image,

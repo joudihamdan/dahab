@@ -1,8 +1,6 @@
 import 'package:dahab_clinic_management/utils/color_manager.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import '../screen/Home page/nav_bar.dart';
 import '../utils/style_maneger.dart';
 

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:dahab_clinic_management/theme.dart';
 import 'package:get/get.dart';
 
 class ProfileController extends GetxController{
@@ -18,8 +18,7 @@ class ProfileController extends GetxController{
 
   void toggleTheme() {
     isDarkMode.value = !isDarkMode.value;
-    print(isDarkMode.value);
-    Get.changeThemeMode(isDarkMode.value ? ThemeMode.dark : ThemeMode.light);
+    Get.changeTheme(Get.isDarkMode ? lightTheme: darkTheme );
   }
 
   void rate() {

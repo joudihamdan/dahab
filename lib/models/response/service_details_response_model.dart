@@ -9,7 +9,7 @@ class ServiceDetailsResponseModel extends ResultModel{
   final String name;
   final String image;
   final String description;
-  final double price;
+  final int price;
 
   ServiceDetailsResponseModel({
     required this.id,
@@ -26,7 +26,7 @@ class ServiceDetailsResponseModel extends ResultModel{
     String? name,
     String? image,
     String? description,
-    double? price,
+    int? price,
   }) {
     return ServiceDetailsResponseModel(
       id: id ?? this.id,
@@ -56,7 +56,7 @@ class ServiceDetailsResponseModel extends ResultModel{
       name: map['name'] as String,
       image: map['image'] as String,
       description: map['description'] as String,
-      price: map['price'] as double,
+      price: map['price'] as int,
     );
   }
 
