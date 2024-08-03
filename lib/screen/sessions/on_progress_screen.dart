@@ -1,11 +1,7 @@
 import 'package:dahab_clinic_management/controllers/sessions_controller.dart';
-import 'package:dahab_clinic_management/helper/dialogs.dart';
-import 'package:dahab_clinic_management/models/response/sessions_model.dart';
+import 'package:dahab_clinic_management/models/sessions_model.dart';
 import 'package:dahab_clinic_management/models/result_model.dart';
-import 'package:dahab_clinic_management/screen/Home%20page/sessions_screen.dart';
 import 'package:dahab_clinic_management/screen/global/no_data_screen.dart';
-import 'package:dahab_clinic_management/utils/color_manager.dart';
-import 'package:dahab_clinic_management/utils/style_maneger.dart';
 import 'package:dahab_clinic_management/widgets/listtile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,6 +33,9 @@ class _OnProgressScreenState extends State<OnProgressScreen> {
                 .length,
             itemBuilder: (context, index) {
               return ListtileCard(
+                  id: (controller.resultModel.value as ListOf<SessionsModel>)
+                      .resutl[index]
+                      .id,
                   name: (controller.resultModel.value as ListOf<SessionsModel>)
                       .resutl[index]
                       .service,
@@ -48,6 +47,8 @@ class _OnProgressScreenState extends State<OnProgressScreen> {
                       .time);
             },
           );
+        } else if (controller.resultModel.value is EmptyResult) {
+          return const Center(child: Text("No session"));
         } else if (controller.resultModel.value is ExceptionResult) {
           return const NoDataScreen();
         } else {
@@ -59,4 +60,3 @@ class _OnProgressScreenState extends State<OnProgressScreen> {
     );
   }
 }
-

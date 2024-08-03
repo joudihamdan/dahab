@@ -1,18 +1,21 @@
 import 'package:dahab_clinic_management/controllers/service_controller.dart';
-import 'package:dahab_clinic_management/models/response/service_details_response_model.dart';
+import 'package:dahab_clinic_management/models/service_details_response_model.dart';
 import 'package:dahab_clinic_management/models/result_model.dart';
+import 'package:dahab_clinic_management/models/service_response_model.dart';
+import 'package:dahab_clinic_management/screen/category_screen.dart';
 import 'package:dahab_clinic_management/screen/global/no_data_screen.dart';
 import 'package:dahab_clinic_management/services/base_services.dart';
 import 'package:dahab_clinic_management/widgets/leading_icon.dart';
-import 'package:dahab_clinic_management/screen/book_screen.dart';
+import 'package:dahab_clinic_management/screen/booking_screen.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
 import 'package:dahab_clinic_management/utils/style_maneger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ServiceScreen extends StatefulWidget {
-  const ServiceScreen({super.key, required this.id});
+   ServiceScreen({super.key, required this.id,  this.cat_id});
   final int id;
+   int? cat_id;
   @override
   State<ServiceScreen> createState() => _ServiceScreenState();
 }
@@ -58,8 +61,11 @@ class _ServiceScreenState extends State<ServiceScreen>
               height: 250,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(
-                        "$baseUrlImage${(serviceDeController.resultModel.value as ServiceDetailsResponseModel).image}"),
+                    image: Image.network(
+                      "$baseUrlImage${(serviceDeController.resultModel.value as ServiceDetailsResponseModel).image}",
+                      errorBuilder: (context, error, stackTrace) =>
+                          const FlutterLogo(),
+                    ).image,
                     fit: BoxFit.fill),
               ),
               child: ClipRRect(
@@ -79,13 +85,13 @@ class _ServiceScreenState extends State<ServiceScreen>
                 ),
               ),
             ),
-            const Positioned(top: 15, child: LeadingIcon()),
+             Positioned(top: 15,child: LeadingIcon(), ),
             Positioned(
               top: 15,
               left: 150,
               child: Text(
-                (serviceDeController.resultModel.value
-                        as ServiceDetailsResponseModel)
+                (serviceDeController.resultModel.value as ServiceDetailsResponseModel
+                        )
                     .name,
                 style: StyleManager.kAppBar,
               ),
@@ -157,7 +163,7 @@ class _ServiceScreenState extends State<ServiceScreen>
       } else if (serviceDeController.resultModel.value is ExceptionResult) {
         return const NoDataScreen();
       } else
-        return const Center(child: CircularProgressIndicator());
+        {return const Center(child: CircularProgressIndicator());}
     }));
   }
 }

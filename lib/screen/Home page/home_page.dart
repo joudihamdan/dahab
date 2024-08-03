@@ -1,6 +1,5 @@
-import 'package:dahab_clinic_management/models/response/category_model.dart';
-import 'package:dahab_clinic_management/models/service_model.dart';
 import 'package:dahab_clinic_management/screen/category_screen.dart';
+import 'package:dahab_clinic_management/screen/offre_details_screen.dart';
 import 'package:dahab_clinic_management/screen/service_screen.dart';
 import 'package:dahab_clinic_management/utils/assets_manager.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
@@ -89,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                   child: GestureDetector(
                     onTap: () {
                       Get.to(() => CategoryScreen(
-                            categoryId: index+1,
+                            categoryId: index + 1,
                           ));
                     },
                     child: categories_card(
@@ -121,10 +120,10 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: GestureDetector(
                       onTap: () {
-
-                        Get.to(()=>ServiceScreen(
-                          id: index+1,
-                        ));
+                        Get.to(() => ServiceScreen(
+                          
+                              id: index + 1,
+                            ));
                       },
                       child: service_card(
                           width, height, 'assets/images/im.png', 'Derma')),
@@ -198,7 +197,9 @@ class _HomePageState extends State<HomePage> {
                       height: height * 0.05,
                       //  width: width * 0.25,
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => const OffreDetailsScreen(offerId: 1));
+                        },
                         child: Text(
                           'Book!',
                           style: kText.copyWith(

@@ -40,10 +40,6 @@ class _SpecialistCardState extends State<SpecialistCard> {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    // CircleAvatar(
-                    //   backgroundImage: ,
-                    //   radius: 50,
-                    // ),
                     const SizedBox(height: 8),
                     Text(
                       (specialistController.resultModel.value
@@ -69,7 +65,8 @@ class _SpecialistCardState extends State<SpecialistCard> {
                   setState(
                     () {
                       specialistController.setSelectedIndex(index);
-                      print("oiiiiii ${specialistController.selectedIndex.value}");
+                      print(
+                          "oiiiiii ${specialistController.selectedIndex.value}");
                     },
                   );
                 },

@@ -1,13 +1,11 @@
 
 // ignore_for_file: avoid_print
 
-import 'package:dahab_clinic_management/models/response/category_model.dart';
-import 'package:dahab_clinic_management/models/response/service_response_model.dart';
+import 'package:dahab_clinic_management/models/category_model.dart';
 import 'package:dahab_clinic_management/models/result_model.dart';
 import 'package:dahab_clinic_management/services/base_services.dart';
 import 'package:dio/dio.dart';
 
-import '../models/response/service_details_response_model.dart';
 
 class CategoryService extends BaseServices {
   Future<ResultModel> getCategoryById(int id) async {

@@ -1,11 +1,13 @@
 // ignore_for_file: avoid_print
 
-import 'package:dahab_clinic_management/models/response/service_response_model.dart';
+import 'dart:developer';
+
+import 'package:dahab_clinic_management/models/service_response_model.dart';
 import 'package:dahab_clinic_management/models/result_model.dart';
 import 'package:dahab_clinic_management/services/base_services.dart';
 import 'package:dio/dio.dart';
 
-import '../models/response/service_details_response_model.dart';
+import '../models/service_details_response_model.dart';
 
 class ServicesService extends BaseServices {
 
@@ -13,6 +15,7 @@ class ServicesService extends BaseServices {
     try {
       response = await dio.get("$baseUrl/Services/$categoryId");
       if (response.statusCode == 200) {
+        log("WHat the hell !!!");
         List<ServiceResponseModel> services = List.generate(
           response.data.length,
           (index) => ServiceResponseModel.fromMap(response.data[index]),

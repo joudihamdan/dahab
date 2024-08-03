@@ -1,4 +1,4 @@
-import 'package:dahab_clinic_management/helper/dialogs.dart';
+import 'package:dahab_clinic_management/helper/sessions_dialogs.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
 import 'package:flutter/material.dart';
 

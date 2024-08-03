@@ -63,8 +63,7 @@ static TextStyle kCardTextStyle = const TextStyle(
 
   static ButtonStyle ElevatedButtonStyle= ElevatedButton.styleFrom(
     backgroundColor:
-    const Color(0xff643624)
-        .withOpacity(0.8),
+    ColorManager.jBrownColor,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(25),
     ),

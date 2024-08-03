@@ -1,12 +1,12 @@
 import 'dart:ui';
 import 'package:dahab_clinic_management/controllers/category_controller.dart';
 import 'package:dahab_clinic_management/controllers/service_controller.dart';
-import 'package:dahab_clinic_management/models/response/service_response_model.dart';
+import 'package:dahab_clinic_management/models/service_response_model.dart';
 import 'package:dahab_clinic_management/models/result_model.dart';
 import 'package:dahab_clinic_management/screen/service_screen.dart';
 import 'package:dahab_clinic_management/widgets/service_card.dart';
 import 'package:dahab_clinic_management/widgets/leading_icon.dart';
-import 'package:dahab_clinic_management/models/response/category_model.dart';
+import 'package:dahab_clinic_management/models/category_model.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
 import 'package:dahab_clinic_management/utils/style_maneger.dart';
 import 'package:flutter/material.dart';
@@ -26,36 +26,44 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   final v = Get.put(CategoryController());
-  final serviceController = Get.put(ServiceController());
+  final serviceController = Get.put(ServiceControllerNew());
 
   @override
   void initState() {
     super.initState();
-    v.getCategory(widget.categoryId);
-    serviceController.getServices(1);
+    
+    // serviceController.getServices(widget.categoryId);
+    
   }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
     double width = MediaQuery.sizeOf(context).width;
+    v.getCategory(widget.categoryId);
 
+    serviceController.getServices(widget.categoryId);
     return Scaffold(
-      backgroundColor:  ColorManager.jCreamColor,
+      backgroundColor: ColorManager.jCreamColor,
       body: Obx(
         () {
           if (v.resultModel.value is CategoryModel) {
-            return CustomScrollView(
+            return
+                // Shimmer.fromColors(
+                //   baseColor: Colors.grey.shade300,
+                //   highlightColor: Colors.grey.shade100,
+                //   enabled: true,
+                //   child:
+                CustomScrollView(
               slivers: [
                 SliverAppBar(
                   bottom: PreferredSize(
                     preferredSize: const Size.fromHeight(0),
                     child: Container(
                       decoration: const BoxDecoration(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(25)),
-                        color:  ColorManager.jCreamColor
-                      ),
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(25)),
+                          color: ColorManager.jCreamColor),
                       width: double.infinity,
                       height: 15,
                       child: const SizedBox(),
@@ -76,6 +84,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       children: [
                         Image.network(
                           "$baseUrlImage${(v.resultModel.value as CategoryModel).image}",
+                          errorBuilder: (context, error, stackTrace) =>
+                              const FlutterLogo(),
                           fit: BoxFit.cover,
                         ),
                         BackdropFilter(
@@ -142,19 +152,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         delegate: SliverChildBuilderDelegate(
                           (BuildContext context, int index) {
                             return Center(
-                              child: InkWell(
-                                onTap: () {
-                                  Get.to(()=>ServiceScreen(id: index+1));
-                                },
-                                child: ServiceCard(
-                                    id: index,
-                                    image:
-                                        "$baseUrlImage${(serviceController.resultModel.value as ListOf<ServiceResponseModel>).resutl[index].image}",
-                                    name: (serviceController.resultModel.value
-                                            as ListOf<ServiceResponseModel>)
-                                        .resutl[index]
-                                        .name),
-                              ),
+                              child: ServiceCard(
+                                cat_id: widget.categoryId,
+                                  id: (serviceController.resultModel.value
+                                      as ListOf<ServiceResponseModel>).resutl[index].id,
+                                  image:
+                                      "$baseUrlImage${(serviceController.resultModel.value as ListOf<ServiceResponseModel>).resutl[index].image}",
+                                  name: (serviceController.resultModel.value
+                                          as ListOf<ServiceResponseModel>)
+                                      .resutl[index]
+                                      .name),
                             );
                           },
                           childCount: (serviceController.resultModel.value
@@ -169,12 +176,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           child: Center(child: NoDataScreen()));
                     } else {
                       return const SliverToBoxAdapter(
-                          child:
-                              Center(child: CircularProgressIndicator()));
+                          child: Center(child: CircularProgressIndicator()));
                     }
                   },
                 ),
               ],
+              //   ),
             );
           } else if (v.resultModel.value is EmptyResult) {
             return const Center(child: NoDataScreen());

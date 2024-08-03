@@ -9,7 +9,10 @@ class SpecialistService extends BaseServices {
 
   Future<ResultModel> getSpecialist(int serviceId) async {
     try {
+      print("hi 1");
       response = await dio.get("$baseUrl/service-specialist/$serviceId/specialist-names");
+            print("hi 2");
+
       if (response.statusCode == 200) {
         List<SpecialistModel> services = List.generate(
           response.data.length,

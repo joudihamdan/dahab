@@ -1,4 +1,4 @@
-import 'package:dahab_clinic_management/models/response/sessions_model.dart';
+import 'package:dahab_clinic_management/models/sessions_model.dart';
 import 'package:dahab_clinic_management/screen/sessions/completed_screen.dart';
 import 'package:dahab_clinic_management/screen/sessions/on_progress_screen.dart';
 import 'package:dahab_clinic_management/screen/sessions/pending_screen.dart';
@@ -72,15 +72,15 @@ class _SessionsScreenState extends State<SessionsScreen>
               return FadeTransition(opacity: animation, child: child);
             },
             child: controller.selectedIndex.value == 0
-                ? PendingScreen(
-                    key: const ValueKey('Pending'),
+                ? const PendingScreen(
+                    key: ValueKey('Pending'),
                   )
                 : controller.selectedIndex.value == 1
                     ? const OnProgressScreen(
                         key: ValueKey('On Progress'),
                       )
-                    : CompletedScreen(
-                        key: const ValueKey('Completed'),
+                    :  CompletedScreen(
+                        key: ValueKey('Completed'),
                       ),
           );
         },

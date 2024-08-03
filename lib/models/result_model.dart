@@ -22,3 +22,10 @@ ListOf({
   required this.resutl,
 });
 }
+
+class ListSt<T>  extends ResultModel{
+List<T> resutl ;
+ListSt({
+  required this.resutl,
+});
+}

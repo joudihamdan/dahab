@@ -1,5 +1,5 @@
 import 'package:dahab_clinic_management/controllers/sessions_controller.dart';
-import 'package:dahab_clinic_management/models/response/sessions_model.dart';
+import 'package:dahab_clinic_management/models/sessions_model.dart';
 import 'package:dahab_clinic_management/models/result_model.dart';
 import 'package:dahab_clinic_management/screen/global/no_data_screen.dart';
 import 'package:dahab_clinic_management/widgets/listtile_card.dart';
@@ -32,6 +32,9 @@ class _PendingScreenState extends State<PendingScreen> {
                 .length,
             itemBuilder: (context, index) {
               return ListtileCard(
+                  id: (controller.resultModel.value as ListOf<SessionsModel>)
+                      .resutl[index]
+                      .id,
                   name: (controller.resultModel.value as ListOf<SessionsModel>)
                       .resutl[index]
                       .service,
@@ -43,6 +46,8 @@ class _PendingScreenState extends State<PendingScreen> {
                       .time);
             },
           );
+        } else if (controller.resultModel.value is EmptyResult) {
+          return Center(child: const Text("No session yet"));
         } else if (controller.resultModel.value is ExceptionResult) {
           return const NoDataScreen();
         } else {

@@ -2,27 +2,22 @@
 
 import 'package:dahab_clinic_management/const/constant.dart';
 import 'package:dahab_clinic_management/models/result_model.dart';
-import 'package:dahab_clinic_management/models/shift_time_model.dart';
 import 'package:dahab_clinic_management/services/base_services.dart';
 import 'package:dio/dio.dart';
 
-class ReservationSevices extends BaseServices {
-  Future<ResultModel> getTimesByDate(
-      int serviceId, int specialistId, String date) async {
+class OfferBookingServices extends BaseServices {
+  Future<ResultModel> getOfferTimesByDate(int offerId, String date) async {
     try {
       response = await dio.get(
-        "$baseUrl/available/$serviceId/$specialistId?date=$date",
-        //"http://127.0.0.1:8000/api/available/2/3?date=2024-08-02",
+        "$baseUrl/availableslot/$offerId?date=$date",
         options: Options(headers: {'Authorization': "Bearer $token"}),
       );
+      print(response.data);
       if (response.statusCode == 200) {
-        List<ShiftTimeModel> times = List.generate(
-          response.data.length,  
-          (index) => ShiftTimeModel.fromMap(response.data[index]),
-        );
-      //  print(response.data);
-        print("times get successfully");
-        return ListOf<ShiftTimeModel>(resutl: times);
+        List times = response.data;
+        print(response.data);
+        print("offre times get successfully");
+        return ListSt(resutl: times);
       } else {
         return ErrorsResult("oops something is Wrong");
       }
@@ -34,15 +29,14 @@ class ReservationSevices extends BaseServices {
     }
   }
 
-
-  Future<ResultModel> bookAppointment(int timeId) async {
+  Future<ResultModel> bookOfferAppointment(
+      int offerId, String date, String time) async {
     try {
-      response = await dio.post(
-        "$baseUrl/slots/$timeId/book",
-        options: Options(
-          headers: {'Authorization': "Bearer $token"},
-        ),
-      );
+      response = await dio.post("$baseUrl/offer/$offerId",
+          options: Options(
+            headers: {'Authorization': "Bearer $token"},
+          ),
+          data: {"date": date, "time": time});
       if (response.statusCode == 200) {
         print(response.data);
         print("appointment booked successfully");
@@ -57,6 +51,4 @@ class ReservationSevices extends BaseServices {
       );
     }
   }
-
-  
 }

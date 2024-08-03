@@ -4,11 +4,11 @@ import '../../const/constant.dart';
 
 class ContainerButton extends StatelessWidget {
   const ContainerButton({
-    Key? key,
+    super.key,
     required this.height,
     required this.width,
     required this.child,
-  }) : super(key: key);
+  });
 
   final double height;
   final double width;

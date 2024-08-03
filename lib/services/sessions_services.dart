@@ -1,14 +1,12 @@
 // ignore_for_file: avoid_print
 
 import 'package:dahab_clinic_management/const/constant.dart';
-import 'package:dahab_clinic_management/models/response/sessions_model.dart';
+import 'package:dahab_clinic_management/models/sessions_model.dart';
 import 'package:dahab_clinic_management/models/result_model.dart';
 import 'package:dahab_clinic_management/services/base_services.dart';
 import 'package:dio/dio.dart';
 
-
 class SessionsServices extends BaseServices {
- 
   Future<ResultModel> getPendingSession() async {
     try {
       response = await dio.get(
@@ -20,8 +18,12 @@ class SessionsServices extends BaseServices {
           response.data.length,
           (index) => SessionsModel.fromMap(response.data[index]),
         );
-        print("sessions get successfully");
-        return ListOf<SessionsModel>(resutl: sessions);
+        if (sessions.isEmpty) {
+          return EmptyResult("is empty");
+        } else {
+          print("sessions get successfully");
+          return ListOf<SessionsModel>(resutl: sessions);
+        }
       } else {
         return ErrorsResult("oops something is Wrong");
       }
@@ -44,8 +46,12 @@ class SessionsServices extends BaseServices {
           response.data.length,
           (index) => SessionsModel.fromMap(response.data[index]),
         );
-        print("sessions get successfully");
-        return ListOf<SessionsModel>(resutl: sessions);
+        if (sessions.isEmpty) {
+          return EmptyResult("is empty");
+        } else {
+          print("sessions get successfully");
+          return ListOf<SessionsModel>(resutl: sessions);
+        }
       } else {
         return ErrorsResult("oops something is Wrong");
       }
@@ -68,8 +74,55 @@ class SessionsServices extends BaseServices {
           response.data.length,
           (index) => SessionsModel.fromMap(response.data[index]),
         );
-        print("sessions get successfully");
-        return ListOf<SessionsModel>(resutl: sessions);
+        if (sessions.isEmpty) {
+          return EmptyResult("is empty");
+        } else {
+          print("sessions get successfully");
+          return ListOf<SessionsModel>(resutl: sessions);
+        }
+      } else {
+        return ErrorsResult("oops something is Wrong");
+      }
+    } on DioException catch (e) {
+      print(e.toString());
+      return ExceptionResult(
+        message: e.message!,
+      );
+    }
+  }
+
+
+  Future<ResultModel> cancelReservation(int sessionId) async {
+    try {
+      response = await dio.delete("$baseUrl/sessions/delete/$sessionId",
+          options: Options(
+            headers: {'Authorization': "Bearer $token"},
+          ));
+      print(response.statusCode);
+      print(sessionId);
+      if (response.statusCode == 200) {
+        print("delete session done successfully");
+        return SuccessResult();
+      } else {
+        return ErrorsResult("oops something is Wrong");
+      }
+    } on DioException catch (e) {
+      print(e.toString());
+      print("rno");
+      return ExceptionResult(
+        message: e.message!,
+      );
+    }
+  }
+
+  Future<ResultModel> editReservation(int sessionId, int timeId) async {
+    try {
+      response = await dio.put("$baseUrl/sessions/update/$sessionId",
+          options: Options(headers: {'Authorization': "Bearer $token"}),
+          data: {"available_slots_id": "$timeId"});
+      if (response.statusCode == 200) {
+        print("edit done successfully");
+        return SuccessResult();
       } else {
         return ErrorsResult("oops something is Wrong");
       }

@@ -4,19 +4,23 @@ import 'dart:convert';
 import 'package:dahab_clinic_management/models/result_model.dart';
 
 class ServiceResponseModel extends ResultModel {
+  final int id;
   final String name;
-  final String image;
+  final String? image;
   
   ServiceResponseModel({
+    required this.id,
     required this.name,
     required this.image,
   });
 
   ServiceResponseModel copyWith({
+    int? id,
     String? name,
     String? image,
   }) {
     return ServiceResponseModel(
+      id: id ?? this.id,
       name: name ?? this.name,
       image: image ?? this.image,
     );
@@ -24,6 +28,7 @@ class ServiceResponseModel extends ResultModel {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'name': name,
       'image': image,
     };
@@ -31,8 +36,9 @@ class ServiceResponseModel extends ResultModel {
 
   factory ServiceResponseModel.fromMap(Map<String, dynamic> map) {
     return ServiceResponseModel(
+      id: map['id'] as int,
       name: map['name'] as String,
-      image: map['image'] as String,
+      image: map['image'] != null ? map['image'] as String : null,
     );
   }
 
@@ -41,18 +47,19 @@ class ServiceResponseModel extends ResultModel {
   factory ServiceResponseModel.fromJson(String source) => ServiceResponseModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'ServiceResponseModel(name: $name, image: $image)';
+  String toString() => 'ServiceResponseModel(id: $id, name: $name, image: $image)';
 
   @override
   bool operator ==(covariant ServiceResponseModel other) {
     if (identical(this, other)) return true;
   
     return 
+      other.id == id &&
       other.name == name &&
       other.image == image;
   }
 
   @override
-  int get hashCode => name.hashCode ^ image.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ image.hashCode;
 }
 

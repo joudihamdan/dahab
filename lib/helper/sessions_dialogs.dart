@@ -1,3 +1,4 @@
+import 'package:dahab_clinic_management/controllers/sessions_controller.dart';
 import 'package:dahab_clinic_management/services/review_service.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
 import 'package:dahab_clinic_management/utils/style_maneger.dart';
@@ -69,7 +70,6 @@ showReviewDialog(int sessionId) {
                     } else {
                       Get.snackbar('Error', 'Please fill all fields');
                     }
-                    
                   },
                   child: Text(
                     "Go",
@@ -102,7 +102,8 @@ showThanksDialog() {
   );
 }
 
-showConfirmDeleteReservationDialog() {
+showConfirmDeleteReservationDialog(int id) {
+  SessionsController sessionsController = Get.put(SessionsController());
   Get.dialog(
     Dialog(
       backgroundColor: ColorManager.jCreamColor,
@@ -123,8 +124,15 @@ showConfirmDeleteReservationDialog() {
               children: [
                 ElevatedButton(
                   style: StyleManager.ElevatedButtonStyle.copyWith(
-                      minimumSize: const WidgetStatePropertyAll(Size(60, 20))),
-                  onPressed: () {},
+                    minimumSize: const WidgetStatePropertyAll(
+                      Size(60, 20),
+                    ),
+                  ),
+                  onPressed: () {
+                    sessionsController.deleteSession(id);
+                    sessionsController.removeSession(id);
+                    Get.back();
+                  },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Text(
@@ -135,7 +143,10 @@ showConfirmDeleteReservationDialog() {
                 ),
                 ElevatedButton(
                   style: StyleManager.ElevatedButtonStyle.copyWith(
-                      minimumSize: const WidgetStatePropertyAll(Size(40, 15))),
+                    minimumSize: const WidgetStatePropertyAll(
+                      Size(40, 15),
+                    ),
+                  ),
                   onPressed: () {
                     Get.back();
                   },
