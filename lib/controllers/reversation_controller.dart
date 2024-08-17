@@ -39,19 +39,20 @@ class ReversationController extends GetxController {
 
   bookAppointment(int id) async {
     resultModel.value = await ReservationSevices().bookAppointment(id);
+    
   }
 
   //////offfer
-  // var offertimeResult = ResultModel().obs;
-  // var successResult = ResultModel().obs;
+  var offertimeResult = ResultModel().obs;
+  var successResult = ResultModel().obs;
 
-  // getOfferTimes(int offerId, String date) async {
-  //   timeResult.value =
-  //       await OfferBookingServices().getOfferTimesByDate(offerId, date);
-  // }
+  getOfferTimes(int offerId, String date) async {
+    offertimeResult.value =
+        await OfferBookingServices().getOfferTimesByDate(offerId, date);
+  }
 
-  // bookOffer(int offerId, String date, String time) async {
-  //   successResult.value =
-  //       await OfferBookingServices().bookOfferAppointment(offerId, date, time);
-  // }
+  bookOffer(int offerId, String date, String time) async {
+    successResult.value =
+        await OfferBookingServices().bookOfferAppointment(offerId, date, time);
+  }
 }

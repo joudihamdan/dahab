@@ -9,13 +9,13 @@ class SessionsModel extends ResultModel {
   final String service;
   final String date;
   final String time;
-  final String specialist;
+  final String? specialist;
   SessionsModel({
     required this.id,
     required this.service,
     required this.date,
     required this.time,
-    required this.specialist,
+     this.specialist,
   });
   
 
@@ -52,7 +52,7 @@ class SessionsModel extends ResultModel {
       service: map['service'] as String,
       date: map['date'] as String,
       time: map['time'] as String,
-      specialist: map['specialist'] as String,
+      specialist: map['specialist'] ,
     );
   }
 
@@ -87,11 +87,3 @@ class SessionsModel extends ResultModel {
   }
 }
 
-class SessionModel extends ResultModel {
-  final String sreviceName;
-  final String date;
-  final String time;
-
-  SessionModel(
-      {required this.sreviceName, required this.date, required this.time});
-}

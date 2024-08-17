@@ -23,6 +23,11 @@ ListOf({
 });
 }
 
+class justString extends ResultModel{
+  final String resutl ;
+
+  justString(this.resutl);
+}
 class ListSt<T>  extends ResultModel{
 List<T> resutl ;
 ListSt({

@@ -115,11 +115,14 @@ class SessionsServices extends BaseServices {
     }
   }
 
-  Future<ResultModel> editReservation(int sessionId, int timeId) async {
+  Future<ResultModel> editReservation(int sessionId, int timeId ,int speciallistId) async {
     try {
       response = await dio.put("$baseUrl/sessions/update/$sessionId",
           options: Options(headers: {'Authorization': "Bearer $token"}),
-          data: {"available_slots_id": "$timeId"});
+          data: {
+            "specialist_id": "$timeId", 
+          "available_slots_id": "$speciallistId"
+          });
       if (response.statusCode == 200) {
         print("edit done successfully");
         return SuccessResult();

@@ -22,7 +22,7 @@ class CodeContainer extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(width * 0.002),
       decoration: const BoxDecoration(
-        color: Colors.white,
+       // color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       height: height * 0.09,
@@ -30,7 +30,7 @@ class CodeContainer extends StatelessWidget {
       child: TextFormField(
         textDirection: TextDirection.ltr,
         cursorColor: kBrownColor,
-        style: const TextStyle(color: Colors.green),
+      //  style: const TextStyle(color: Colors.green),
         maxLength: 1,
         textAlign: TextAlign.center,
         onChanged: (value) {
@@ -45,7 +45,9 @@ class CodeContainer extends StatelessWidget {
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
-                  color: kBrownColor, style: BorderStyle.none)),
+                 // color: kBrownColor, 
+                  style: BorderStyle.none)
+                  ),
         ),
       ),
     );

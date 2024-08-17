@@ -1,4 +1,6 @@
 import 'package:dahab_clinic_management/screen/Auth/auth_page.dart';
+import 'package:dahab_clinic_management/screen/global/no_internet_screen.dart';
+import 'package:dahab_clinic_management/theme.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       defaultTransition: Transition.fade,
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: AuthPage(),
     );
   }

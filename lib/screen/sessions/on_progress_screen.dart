@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OnProgressScreen extends StatefulWidget {
-  const OnProgressScreen({super.key});
+  const OnProgressScreen({
+    super.key,
+  });
 
   @override
   State<OnProgressScreen> createState() => _OnProgressScreenState();
@@ -33,9 +35,10 @@ class _OnProgressScreenState extends State<OnProgressScreen> {
                 .length,
             itemBuilder: (context, index) {
               return ListtileCard(
-                  id: (controller.resultModel.value as ListOf<SessionsModel>)
-                      .resutl[index]
-                      .id,
+                  sessionId:
+                      (controller.resultModel.value as ListOf<SessionsModel>)
+                          .resutl[index]
+                          .id,
                   name: (controller.resultModel.value as ListOf<SessionsModel>)
                       .resutl[index]
                       .service,
@@ -60,3 +63,4 @@ class _OnProgressScreenState extends State<OnProgressScreen> {
     );
   }
 }
+

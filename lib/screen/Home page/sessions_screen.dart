@@ -1,4 +1,3 @@
-import 'package:dahab_clinic_management/models/sessions_model.dart';
 import 'package:dahab_clinic_management/screen/sessions/completed_screen.dart';
 import 'package:dahab_clinic_management/screen/sessions/on_progress_screen.dart';
 import 'package:dahab_clinic_management/screen/sessions/pending_screen.dart';
@@ -41,8 +40,9 @@ class _SessionsScreenState extends State<SessionsScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       appBar: AppBar(
-        backgroundColor: ColorManager.kCoffeeColor,
+       backgroundColor:  Theme.of(context).primaryColor,
         title: const Text(
           'Sessions',
           style: StyleManager.kAppBar,
@@ -89,8 +89,3 @@ class _SessionsScreenState extends State<SessionsScreen>
   }
 }
 
-List<SessionModel> onProgressSessionList = [
-  SessionModel(sreviceName: "dermal", date: "2024.7.14", time: "9:00 AM"),
-  SessionModel(sreviceName: "mesobash", date: "2024.7.6", time: "11:30 AM"),
-  SessionModel(sreviceName: "hand laser", date: "2024.7.14", time: "13:00 PM"),
-];

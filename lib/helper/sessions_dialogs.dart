@@ -1,4 +1,5 @@
 import 'package:dahab_clinic_management/controllers/sessions_controller.dart';
+import 'package:dahab_clinic_management/models/result_model.dart';
 import 'package:dahab_clinic_management/services/review_service.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
 import 'package:dahab_clinic_management/utils/style_maneger.dart';
@@ -119,7 +120,6 @@ showConfirmDeleteReservationDialog(int id) {
                     fontSize: 20)),
             const SizedBox(height: 40.0),
             Row(
-              // mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
@@ -130,8 +130,18 @@ showConfirmDeleteReservationDialog(int id) {
                   ),
                   onPressed: () {
                     sessionsController.deleteSession(id);
-                    sessionsController.removeSession(id);
                     Get.back();
+                    // print(sessionsController.deleteUpdateRes.value);
+                    // if (sessionsController.deleteUpdateRes.value is SuccessResult) {
+                      
+                    //   Get.snackbar(
+                    //       "Successfully", "your session delete successfully");
+                    // } else {
+                    //   Get.snackbar(
+                    //       colorText: Colors.red,
+                    //       "failes",
+                    //       "your session hasn't deleted try again ");
+                    // }
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),

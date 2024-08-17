@@ -30,11 +30,14 @@ class NavigationsBar extends StatelessWidget {
           ),
           bottomNavigationBar: CurvedNavigationBar(
             height: 55,
-            color: kCoffeeColor,
+            color: Theme.of(context).primaryColor,
             backgroundColor: Theme.of(context).brightness == Brightness.dark
-                ? ColorManager.jBrownColor
-                : Color(0xffFEF3EC),  
-            buttonBackgroundColor: ColorManager.kWhiteColor,
+                ? ColorManager.blackColor
+                : Color(0xffFEF3EC),
+            buttonBackgroundColor:
+                Theme.of(context).brightness == Brightness.dark
+                    ? ColorManager.blackColor
+                    : ColorManager.kWhiteColor,
             onTap: controller.changeTabIndex,
             animationCurve: Curves.linear,
             index: controller.tabIndex,

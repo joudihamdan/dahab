@@ -18,7 +18,7 @@ class ProfileController extends GetxController{
 
   void toggleTheme() {
     isDarkMode.value = !isDarkMode.value;
-    Get.changeTheme(Get.isDarkMode ? lightTheme: darkTheme );
+    Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme );
   }
 
   void rate() {

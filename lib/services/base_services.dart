@@ -1,9 +1,14 @@
-
 import 'package:dio/dio.dart';
-const String baseUrlImage='http://127.0.0.1:8000';
-class BaseServices{
-  final String baseUrl='http://127.0.0.1:8000/api';
 
- Dio dio = Dio();
- late Response response;
+const String serverMode = 'http://pay-tek.cloud:9000';
+const String localMode = "http://127.0.0.1:8000";
+
+const String baseUrlImage = localMode;
+
+
+class BaseServices {
+  final String baseUrl = "$localMode/api";
+
+  Dio dio = Dio();
+  late Response response;
 }

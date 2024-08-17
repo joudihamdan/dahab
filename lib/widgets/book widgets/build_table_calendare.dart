@@ -37,6 +37,7 @@ class BuildTableCalendar extends StatelessWidget {
         const Duration(days: 30),
       ),
     );
-    });
+    },
+    );
   }
 }

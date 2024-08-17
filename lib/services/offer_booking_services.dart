@@ -39,7 +39,7 @@ class OfferBookingServices extends BaseServices {
           data: {"date": date, "time": time});
       if (response.statusCode == 200) {
         print(response.data);
-        print("appointment booked successfully");
+        print("0ffer appointment booked successfully");
         return SuccessResult();
       } else {
         return ErrorsResult("oops something is Wrong");

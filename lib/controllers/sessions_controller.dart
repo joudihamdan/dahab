@@ -26,11 +26,15 @@ class SessionsController extends GetxController {
 
   deleteSession(int sessionId) async {
     deleteUpdateRes.value = await SessionsServices().cancelReservation(sessionId);
+    if(deleteUpdateRes.value is SuccessResult){
+      removeSession(sessionId);
+    }
   }
 
-  editSession(int sessionId, int tomeId) async {
+  editSession(int sessionId, int timeId,int speciallistId) async {
     deleteUpdateRes.value =
-        await SessionsServices().editReservation(sessionId, tomeId);
+        await SessionsServices().editReservation(sessionId, timeId,speciallistId);
+        
   }
 
   removeSession(int id) {

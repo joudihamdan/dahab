@@ -12,7 +12,6 @@ class ReservationSevices extends BaseServices {
     try {
       response = await dio.get(
         "$baseUrl/available/$serviceId/$specialistId?date=$date",
-        //"http://127.0.0.1:8000/api/available/2/3?date=2024-08-02",
         options: Options(headers: {'Authorization': "Bearer $token"}),
       );
       if (response.statusCode == 200) {
@@ -20,8 +19,8 @@ class ReservationSevices extends BaseServices {
           response.data.length,  
           (index) => ShiftTimeModel.fromMap(response.data[index]),
         );
-      //  print(response.data);
         print("times get successfully");
+        print(times);
         return ListOf<ShiftTimeModel>(resutl: times);
       } else {
         return ErrorsResult("oops something is Wrong");
@@ -36,6 +35,7 @@ class ReservationSevices extends BaseServices {
 
 
   Future<ResultModel> bookAppointment(int timeId) async {
+    print("the time id is $timeId");
     try {
       response = await dio.post(
         "$baseUrl/slots/$timeId/book",

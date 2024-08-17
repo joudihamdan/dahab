@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 class PendingScreen extends StatefulWidget {
   const PendingScreen({super.key});
+  
 
   @override
   State<PendingScreen> createState() => _PendingScreenState();
@@ -17,12 +18,14 @@ class _PendingScreenState extends State<PendingScreen> {
   final SessionsController controller = Get.put(SessionsController());
   @override
   void initState() {
-    controller.getPendingSession();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    
+    controller.getPendingSession();
+
     return Obx(
       () {
         if (controller.resultModel.value is ListOf<SessionsModel>) {
@@ -32,7 +35,7 @@ class _PendingScreenState extends State<PendingScreen> {
                 .length,
             itemBuilder: (context, index) {
               return ListtileCard(
-                  id: (controller.resultModel.value as ListOf<SessionsModel>)
+                  sessionId: (controller.resultModel.value as ListOf<SessionsModel>)
                       .resutl[index]
                       .id,
                   name: (controller.resultModel.value as ListOf<SessionsModel>)

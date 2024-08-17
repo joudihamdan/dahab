@@ -5,25 +5,37 @@ import 'package:dahab_clinic_management/models/offers_model.dart';
 import 'package:dahab_clinic_management/models/result_model.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
 import 'package:dahab_clinic_management/utils/style_maneger.dart';
-import 'package:dahab_clinic_management/widgets/book%20widgets/build_hours_shift.dart';
 import 'package:dahab_clinic_management/widgets/book%20widgets/build_table_calendare.dart';
 import 'package:dahab_clinic_management/widgets/book%20widgets/non_valid_date.dart';
 import 'package:dahab_clinic_management/widgets/leading_icon.dart';
 import 'package:dahab_clinic_management/widgets/make_appointment_button.dart';
+import 'package:dahab_clinic_management/widgets/hour_shift.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OffreDetailsScreen extends StatelessWidget {
+class OffreDetailsScreen extends StatefulWidget {
   const OffreDetailsScreen({super.key, required this.offerId});
   final int offerId;
 
   @override
+  State<OffreDetailsScreen> createState() => _OffreDetailsScreenState();
+}
+
+class _OffreDetailsScreenState extends State<OffreDetailsScreen> {
+  final ReversationController reversationController =
+      Get.put(ReversationController());
+  final OffersController offersController = Get.put(OffersController());
+
+  @override
+  void initState() {
+    offersController.getOfferDetails(widget.offerId);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final ReversationController reversationController =
-        Get.put(ReversationController());
-    OffersController offersController = Get.put(OffersController());
-    offersController.getOfferDetails(offerId);
-  //  reversationController.getOfferTimes(offerId,formatDate(reversationController.focusedDay.value));
+    reversationController.getOfferTimes(
+        widget.offerId, formatDate(reversationController.focusedDay.value));
     return Scaffold(
       backgroundColor: ColorManager.jCreamColor,
       appBar: AppBar(
@@ -64,7 +76,8 @@ class OffreDetailsScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         "price: ${(offersController.offerResult.value as OffersModel).price}",
-                        style: StyleManager.normalText.copyWith(fontWeight: FontWeight.bold),
+                        style: StyleManager.normalText
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     )
                   ],
@@ -96,18 +109,46 @@ class OffreDetailsScreen extends StatelessWidget {
                   Obx(
                     () => reversationController.isWeekend.value
                         ? const NonValidDate()
-                        : const BuildHoursShift(
-                            id: 1,
-                          ),
+                        : Obx(() {
+                            if (reversationController.offertimeResult.value
+                                is ListSt) {
+                              return HourShift(
+                                reversationController: reversationController,
+                                length: (reversationController.offertimeResult.value
+                                        as ListSt)
+                                    .resutl
+                                    .length,
+                                offer: true,
+                              );
+                            } else if (reversationController.offertimeResult.value
+                                is ExceptionResult) {
+                              return const Center(
+                                child: Text("Oops there is something wrong"),
+                              );
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          }),
                   ),
                   const Spacer(),
-                  SizedBox(
+                  Obx(
+                    (){
+                      return SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: reversationController.timeSelected.value
                           ? () {
-                              //    reversationController.bookOffer(offerId,formatDate(reversationController.focusedDay.value),(reversationController.timeResult.value as ListSt).resutl[reversationController.currentIndex.value!]);
-
+                              reversationController.bookOffer(
+                                  widget.offerId,
+                                  formatDate(
+                                      reversationController.focusedDay.value),
+                                  (reversationController.offertimeResult.value
+                                              as ListSt)
+                                          .resutl[
+                                      reversationController
+                                          .currentIndex.value!]);
                               showConfirmReversationDialog();
                             }
                           : null,
@@ -117,6 +158,8 @@ class OffreDetailsScreen extends StatelessWidget {
                         style: StyleManager.buttunTextStyle,
                       ),
                     ),
+                  );
+                    }
                   ),
                   const Spacer(),
                 ],

@@ -1,6 +1,9 @@
+import 'package:dahab_clinic_management/controllers/sessions_controller.dart';
 import 'package:dahab_clinic_management/helper/sessions_dialogs.dart';
+import 'package:dahab_clinic_management/screen/edit_booking_screen.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ListtileCard extends StatelessWidget {
   const ListtileCard(
@@ -8,48 +11,59 @@ class ListtileCard extends StatelessWidget {
       required this.name,
       required this.date,
       required this.time,
-      required this.id});
-  final int id;
+      required this.sessionId,
+      });
+  final int sessionId;
   final String name;
   final String date;
   final String time;
+ 
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: ColorManager.kCreamColor,
-      child: ListTile(
-        title: Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: Text(
-            name,
-            style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 18,
-                color: ColorManager.jBrownColor),
-          ),
-        ),
-        subtitle: Text("$date\t\t$time"),
-        contentPadding: const EdgeInsets.all(8),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.edit,
-                color: ColorManager.jBrownColor,
-              ),
+    SessionsController sessionsController = Get.put(SessionsController());
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Card(
+        color: Theme.of(context).colorScheme.secondaryContainer,
+        child: ListTile(
+          title: Padding(
+            padding: const EdgeInsets.only(bottom: 10,),
+            child: Text(
+              name,
+              style:  TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 18,
+                  color:  Theme.of(context).colorScheme.onSecondary ),
             ),
-            IconButton(
+          ),
+          subtitle: Text("$date\t\t$time"),
+          contentPadding: const EdgeInsets.all(8),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
                 onPressed: () {
-                  showConfirmDeleteReservationDialog(id);
+                  Get.to(() => EditBookingScreen(
+                    id: sessionId,
+                      ));
                 },
-                icon: const Icon(
-                  Icons.delete,
-                  color: ColorManager.jBrownColor,
-                ))
-          ],
+                icon:  Icon(
+                  Icons.edit,
+                  color:Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+              IconButton(
+                  onPressed: () {
+                    showConfirmDeleteReservationDialog(sessionId);
+                  },
+                  icon:  Icon(
+                    Icons.delete,
+                    color:Theme.of(context).colorScheme.onPrimary,
+                  ))
+            ],
+          ),
         ),
       ),
     );
