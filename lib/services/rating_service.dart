@@ -23,19 +23,32 @@ class RatingService extends BaseServices {
     }
   }
 
-  Future<ResultModel> getRate() async {
+  Future<double> getRate() async {
     try {
       response = await dio.get("$baseUrl/rates");
 
       if (response.statusCode == 200) {
-        print("successssssssss");
-        print(response.data);
-        return justString(response.data);
+        String ratingString = response.data.toString();
+        double rating = double.parse(ratingString);
+        print("successss and the avg is $rating");
+        return rating;
       } else {
-        return ErrorsResult("oops failde rerate again!");
+        throw Exception('Failed to load rating');
       }
+    } catch (e) {
+      print('Error: $e');
+      throw Exception('Failed to load rating');
+    }
+  }
+
+  Future<ResultModel> addReview(String review) async {
+    try {
+      response = await dio.post("$baseUrl/addReview",
+          options: Options(headers: {'Authorization': "Bearer $token"}),
+          data: {"review": review});
+      print(review);
+      return SuccessResult();
     } on DioException catch (e) {
-      // print(e.toString());
       return ExceptionResult(
         message: e.message!,
       );

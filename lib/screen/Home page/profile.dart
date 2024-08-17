@@ -1,14 +1,17 @@
 import 'package:dahab_clinic_management/controllers/profile_controller.dart';
+import 'package:dahab_clinic_management/controllers/reate_controlled.dart';
 import 'package:dahab_clinic_management/services/rating_service.dart';
 import 'package:dahab_clinic_management/utils/color_manager.dart';
 import 'package:dahab_clinic_management/utils/style_maneger.dart';
 import 'package:dahab_clinic_management/widgets/ratinr_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
   final _controller = ProfileController();
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -110,6 +113,8 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
+RatingController ratingController = Get.put(RatingController());
+
 void _showRatingDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -117,8 +122,8 @@ void _showRatingDialog(BuildContext context) {
       return RatingDialog(onRatingSelected: (rating) {
         RatingService().addRate(rating);
         print('User selected rating: $rating');
-        RatingService().getRate();
-        _showAverageRatingDialog(context, 4.2);
+
+        _showAverageRatingDialog(context, ratingController.rating.value);
       });
     },
   );
